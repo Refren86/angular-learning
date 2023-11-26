@@ -1,1 +1,15 @@
-<h2>Server component!</h2>
+<!-- <h2
+  
+  [ngStyle]="{ backgroundColor: serverStatus === 'online' ? 'green' : 'red' }"
+>
+  Server with ID {{ serverId }} is {{ serverStatus }}
+</h2> -->
+
+<!-- ngStyle allows to dynamically set style -->
+<!-- ngClass allows to dynamically set class -->
+<h2
+  [ngStyle]="{ backgroundColor: getServerStatusColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
+  Server with ID {{ serverId }} is {{ serverStatus }}
+</h2>

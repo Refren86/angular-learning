@@ -6,6 +6,29 @@
       <app-servers></app-servers>
       <!-- <div app-servers></div> -->
       <!-- <div class="app-servers"></div> -->
+
+      <app-success-alert></app-success-alert>
+      <app-warning-alert></app-warning-alert>
+
+      <button (click)="onDisplayDetailsBtnClick()">Display details</button>
+      <!-- <p [ngStyle]="{ display: isParagraphVisible ? 'block' : 'none' }">
+        Hello world or something
+      </p> -->
+      <p *ngIf="isParagraphVisible">
+        Hello world or something
+      </p>
+
+      <ul>
+        <li
+          *ngFor="let btnClickCount of btnClickCounter; index as i"
+          [ngStyle]="{
+            backgroundColor: i > 3 ? 'blue' : 'transparent'
+          }"
+          [ngClass]="{ whiteColor: i > 3 }"
+        >
+          {{ btnClickCount }}
+        </li>
+      </ul>
     </div>
   </div>
 </div>
