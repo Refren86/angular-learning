@@ -1,6 +1,6 @@
-# MyFirstApp
+# CmpDatabindingStart
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0-rc.5.
 
 ## Development server
 

@@ -1,11 +1,50 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root', // our own html tag
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // variables which go to the html template (data binding)
- 
+  serverElements = [
+    {
+      type: 'server',
+      name: 'test server',
+      content: 'some contetn',
+    },
+  ];
+
+  count = [1];
+
+  onServerAdded({
+    newServerName,
+    newServerContent,
+  }: {
+    newServerName: string;
+    newServerContent: string;
+  }) {
+    this.serverElements.push({
+      type: 'server',
+      name: newServerName,
+      content: newServerContent,
+    });
+  }
+
+  onBlueprintAdded({
+    newServerName,
+    newServerContent,
+  }: {
+    newServerName: string;
+    newServerContent: string;
+  }) {
+    this.serverElements.push({
+      type: 'blueprint',
+      name: newServerName,
+      content: newServerContent,
+    });
+  }
+
+  onGameStart(newCount: number) {
+    this.count.push(newCount);
+  }
 }

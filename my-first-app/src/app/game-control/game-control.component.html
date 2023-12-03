@@ -1,0 +1,17 @@
+<h2>Game control</h2>
+<button class="btn btn-success" (click)="onStartGame()">Start game</button>
+<button class="btn btn-danger" (click)="onStopGame()">Stop game</button>
+
+<div *ngFor="let number of count">
+  <ng-container
+    *ngIf="number % 2 === 0; then evenComponent; else oddComponent"
+  ></ng-container>
+
+  <ng-template #evenComponent>
+    <app-even [number]="number"></app-even>
+  </ng-template>
+
+  <ng-template #oddComponent>
+    <app-odd [number]="number"></app-odd>
+  </ng-template>
+</div>
