@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GameControlComponent {
   @Input() count: number[];
-  @Output() handleGameStart = new EventEmitter();
+  @Output() handleGameStart = new EventEmitter<number>();
 
   timer: ReturnType<typeof setInterval>;
 
