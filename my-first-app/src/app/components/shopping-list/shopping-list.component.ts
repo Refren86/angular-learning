@@ -1,39 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Ingredient } from './../shared/ingredient.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css',
 })
-export class ShoppingListComponent {
-  ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
-  ];
+export class ShoppingListComponent implements OnInit {
+  ingredients: Ingredient[];
 
-  onAddToShoppingList(ingredient: Ingredient) {
-    this.ingredients.push(ingredient);
+  constructor(private shoppingListService: ShoppingListService) {
+    this.shoppingListService.ingredientsChanged.subscribe((ingredients: Ingredient[]) => {
+      this.ingredients = ingredients;
+    })
   }
 
-  onDeleteFromShoppingList(ingredient: Ingredient) {
-    this.ingredients = this.ingredients.reduce((acc, ing) => {
-      if (ing.name.toLowerCase() === ingredient.name.toLowerCase()) {
-        if (ingredient.amount < ing.amount) {
-          acc.push({ ...ing, amount: ing.amount - ingredient.amount });
-        } else if (ingredient.amount >= ing.amount) {
-          return acc;
-        }
-      } else {
-        acc.push(ing);
-      }
-
-      return acc;
-    }, []);
-  }
-
-  onClearShoppingList() {
-    this.ingredients = [];
+  ngOnInit(): void {
+    this.ingredients = this.shoppingListService.getIngredients();
   }
 }
