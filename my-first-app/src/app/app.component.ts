@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { UsersService } from './services/users.service';
+import { CounterService } from './services/counter.service';
 
 @Component({
-  selector: 'app-root', // our own html tag
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  // variables which go to the html template (data binding)
- 
+export class AppComponent implements OnInit {
+  activeUsers: string[];
+  inactiveUsers: string[];
+  
+  constructor(
+    private usersService: UsersService,
+    public countService: CounterService
+  ) {}
+
+  ngOnInit(): void {
+    this.activeUsers = this.usersService.activeUsers;
+    this.inactiveUsers = this.usersService.inactiveUsers;
+  }
 }
