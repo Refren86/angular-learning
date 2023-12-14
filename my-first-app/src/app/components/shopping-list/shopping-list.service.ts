@@ -20,6 +20,15 @@ export class ShoppingListService {
     this.ingredientsChanged.emit(structuredClone(this.ingredients));
   }
 
+  addIngredients(ingredients: Ingredient[]) {
+    // ingredients.forEach((ingredient) => {
+    //   this.ingredients.push(ingredient);
+    // });
+    this.ingredients.push(...ingredients);
+
+    this.ingredientsChanged.emit(structuredClone(this.ingredients));
+  }
+
   deleteIngredient(ingredient: Ingredient) {
     this.ingredients = this.ingredients.reduce((acc, ing) => {
       if (ing.name.toLowerCase() === ingredient.name.toLowerCase()) {

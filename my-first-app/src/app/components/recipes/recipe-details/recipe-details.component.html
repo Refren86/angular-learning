@@ -19,7 +19,11 @@
 
       <ul class="dropdown-menu">
         <li>
-          <a href="#">To shopping list</a>
+          <a
+            (click)="addRecipeIngredientsToShoppingList()"
+            [ngStyle]="{ cursor: 'pointer' }"
+            >To shopping list</a
+          >
         </li>
         <li>
           <a href="#">Edit Recipe</a>
@@ -32,7 +36,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" [ngStyle]="{ margin: '12px 0' }">
   <div class="col-xs-12">
     <img
       src="{{ selectedRecipe.imagePath }}"
@@ -49,6 +53,15 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">Ingredients</div>
+<div class="row" [ngStyle]="{ marginTop: '12px' }">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let ingredient of selectedRecipe.ingredients"
+      >
+        {{ ingredient.name }} - ({{ ingredient.amount }})
+      </li>
+    </ul>
+  </div>
 </div>
