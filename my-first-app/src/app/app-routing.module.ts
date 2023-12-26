@@ -8,8 +8,11 @@ import { ServersComponent } from './servers/servers.component';
 import { ServerComponent } from './servers/server/server.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 import { AuthGuard } from './auth-guard.service';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 const appRoutes: Routes = [
   {
@@ -21,19 +24,34 @@ const appRoutes: Routes = [
     component: UsersComponent,
     children: [{ path: ':userId/:userName', component: UserComponent }],
   },
-
   {
     path: 'servers',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: ServersComponent,
     children: [
-      { path: ':id', component: ServerComponent },
-      { path: ':id/edit', component: EditServerComponent },
+      {
+        path: ':id',
+        component: ServerComponent,
+        resolve: { server: ServerResolver }, // load data dynamically before content is rendered
+      },
+      {
+        path: ':id/edit',
+        component: EditServerComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
     ],
   },
+  // {
+  //   path: 'not-found',
+  //   component: PageNotFoundComponent,
+  // },
   {
     path: 'not-found',
-    component: PageNotFoundComponent,
+    component: ErrorPageComponent,
+    data: {
+      message: 'Page not found 😒',
+    },
   },
   {
     path: '**',
@@ -42,7 +60,8 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  // imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, { useHash: true })], // hack for deployment - https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/6656364#content
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
