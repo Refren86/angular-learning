@@ -1,1 +1,0 @@
-export type TNavLink = "recipes" | "shopping-list";
