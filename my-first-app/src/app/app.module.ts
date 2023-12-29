@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+// components
 import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
@@ -10,8 +11,12 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeListComponent } from './components/recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './components/recipes/recipe-list/recipe-item/recipe-item.component';
 import { RecipeDetailsComponent } from './components/recipes/recipe-details/recipe-details.component';
+import { RecipePlaceholderComponent } from './components/recipes/recipe-placeholder/recipe-placeholder.component';
+
+// directives
 import { DropdownDirective } from './components/shared/dropdown.directive';
 
+// custom modules
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -24,7 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
     RecipeListComponent,
     RecipeItemComponent,
     RecipeDetailsComponent,
-    DropdownDirective
+    DropdownDirective,
+    RecipePlaceholderComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
