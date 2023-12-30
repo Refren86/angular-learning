@@ -18,6 +18,7 @@ import { DropdownDirective } from './components/shared/dropdown.directive';
 
 // custom modules
 import { AppRoutingModule } from './app-routing.module';
+import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     RecipeDetailsComponent,
     DropdownDirective,
     RecipePlaceholderComponent,
+    RecipeEditComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
