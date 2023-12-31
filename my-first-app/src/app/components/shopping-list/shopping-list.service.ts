@@ -1,10 +1,11 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -17,7 +18,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(structuredClone(this.ingredients));
+    this.ingredientsChanged.next(structuredClone(this.ingredients));
   }
 
   addIngredients(ingredients: Ingredient[]) {
@@ -26,7 +27,7 @@ export class ShoppingListService {
     // });
     this.ingredients.push(...ingredients);
 
-    this.ingredientsChanged.emit(structuredClone(this.ingredients));
+    this.ingredientsChanged.next(structuredClone(this.ingredients));
   }
 
   deleteIngredient(ingredient: Ingredient) {
@@ -44,12 +45,12 @@ export class ShoppingListService {
       return acc;
     }, []);
 
-    this.ingredientsChanged.emit(structuredClone(this.ingredients));
+    this.ingredientsChanged.next(structuredClone(this.ingredients));
   }
 
   clearIngredients() {
     this.ingredients = [];
 
-    this.ingredientsChanged.emit(structuredClone(this.ingredients));
+    this.ingredientsChanged.next(structuredClone(this.ingredients));
   }
 }
