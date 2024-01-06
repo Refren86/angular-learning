@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-root', // our own html tag
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // variables which go to the html template (data binding)
- 
+  @ViewChild('formRef', { static: false }) simpleForm: NgForm;
+
+  defaultSubscription = 'advanced';
+
+  submitted = false;
+
+  email = '';
+  subscription = '';
+  password = '';
+
+  onSubmit() {
+    this.email = this.simpleForm.value.email;
+    this.subscription = this.simpleForm.value.subscription;
+    this.password = this.simpleForm.value.password;
+
+    this.submitted = true;
+
+    console.log(this.simpleForm.value);
+  }
 }
