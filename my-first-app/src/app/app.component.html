@@ -17,8 +17,18 @@
                 signupForm.get('userData.username').touched
               "
               class="help-block"
-              >Please enter valid username!</span
             >
+              <span
+                *ngIf="
+                  signupForm.get('userData.username').errors['nameIsForbidden']
+                "
+                >This username is invalid!</span
+              >
+              <span
+                *ngIf="signupForm.get('userData.username').errors['required']"
+                >Username field is required!</span
+              >
+            </span>
           </div>
           <div class="form-group">
             <label for="email">email</label>
@@ -67,10 +77,10 @@
           >Please enter valid data!</span
         >
 
+        <!-- [disabled]="signupForm.invalid && signupForm.touched" -->
         <button
           class="btn btn-primary"
           type="submit"
-          [disabled]="signupForm.invalid && signupForm.touched"
         >
           Submit
         </button>
