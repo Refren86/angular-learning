@@ -6,6 +6,7 @@ import { Ingredient } from '../shared/ingredient.model';
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -14,6 +15,10 @@ export class ShoppingListService {
 
   getIngredients() {
     return structuredClone(this.ingredients);
+  }
+
+  getIngredient(index: number) {
+    return structuredClone(this.ingredients[index]);
   }
 
   addIngredient(ingredient: Ingredient) {
@@ -44,6 +49,13 @@ export class ShoppingListService {
 
       return acc;
     }, []);
+
+    this.ingredientsChanged.next(structuredClone(this.ingredients));
+  }
+
+  updateIngredient(updatedIngredientData: Ingredient & { index: number }) {
+    const { index, ...updatedIngredient } = updatedIngredientData;
+    this.ingredients[index] = updatedIngredient;
 
     this.ingredientsChanged.next(structuredClone(this.ingredients));
   }
